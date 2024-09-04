@@ -1,0 +1,57 @@
+:root {
+    --gray2: #1E1E1E;
+    --accents: #00B2FF;
+    --background: #404040;
+    --glow: #24FF00;
+    --clear: #00000000;
+}
+
+.header {
+    position: relative;
+    width: 100vw;
+    height: 7.4%;
+    top: 0px;
+    flex-shrink: 0;
+    border: 2px solid red;
+    display: flex;
+    flex-direction: row;
+}
+
+.header-section {
+    position: relative;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    border: 2px solid blue;
+}
+
+#header-section-name {
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.header-name-text {
+    position: relative;
+    color: var(--accents);
+    text-indent: 2%;
+    text-wrap: nowrap;
+}
+
+.header-section-button {
+    position: relative;
+    width: 20.8%;
+    height: 75%;
+    right: 2%;
+    top: 12.5%;
+    border-radius: 10px;
+    border: 2px solid var(--clear);
+    background: var(--gray-2, #1E1E1E);
+    color: var(--accents);
+    font-size: 40px;
+}
+
+#header-section-signIn {
+    justify-content: end;
+}

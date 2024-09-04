@@ -1,0 +1,36 @@
+:root {
+  --gray2: #1E1E1E;
+  --accents: #00B2FF;
+  --background: #404040;
+  --glow: #24FF00;
+}
+
+.home {
+  /* border: 2px solid red; */
+  overflow: hidden;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(99deg, rgba(0, 0, 0, 0.00) 81.37%, rgba(36, 255, 0, 0.20) 100%), linear-gradient(261deg, rgba(0, 0, 0, 0.00) 81.37%, rgba(36, 255, 0, 0.20) 100%), var(--Background, #404040);
+}
+
+.divider-container {
+  /* border: 2px solid red; */
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+}
+
+.divider {
+  position: relative;
+  height: 100%;
+  /* border: 2px solid blue; */
+  /* transform: rotate(-70deg);
+  background: var(--accents, #00B2FF);
+  box-shadow: 0px 0px 21.5px 0px var(--accents, #00B2FF);
+  border: 0.5vw solid var(--accents); */
+}
