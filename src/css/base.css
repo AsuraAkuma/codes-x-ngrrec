@@ -1,5 +1,15 @@
+@font-face {
+    font-family: Inter;
+    src: url('../font.ttf');
+}
+
 * {
     margin: 0px;
     padding: 0px;
     outline: 0px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    cursor: default;
 }

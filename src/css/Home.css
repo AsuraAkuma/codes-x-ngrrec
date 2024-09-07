@@ -3,6 +3,10 @@
   --accents: #00B2FF;
   --background: #404040;
   --glow: #24FF00;
+  --accentFilter: invert(67%) sepia(75%) saturate(5454%) hue-rotate(171deg) brightness(107%) contrast(103%);
+  --teamTxt: 40px;
+  --focusTxt: 20px;
+  --btnTxt: 25px;
 }
 
 .home {
@@ -11,7 +15,7 @@
   position: relative;
   height: 100vh;
   width: 100vw;
-  background: linear-gradient(99deg, rgba(0, 0, 0, 0.00) 81.37%, rgba(36, 255, 0, 0.20) 100%), linear-gradient(261deg, rgba(0, 0, 0, 0.00) 81.37%, rgba(36, 255, 0, 0.20) 100%), var(--Background, #404040);
+  background: linear-gradient(99deg, rgba(0, 0, 0, 0.00) 85%, rgba(36, 255, 0, 0.20) 100%), linear-gradient(261deg, rgba(0, 0, 0, 0.00) 85%, rgba(36, 255, 0, 0.20) 100%), var(--Background, #404040);
 }
 
 .divider-container {
@@ -28,9 +32,193 @@
 .divider {
   position: relative;
   height: 100%;
+  transform: rotate(-10deg);
+}
+
+.teams {
+  position: absolute;
+  height: 92.6%;
+  width: 90%;
+  left: 5%;
+  display: flex;
+  flex-direction: row;
+  gap: 10%;
+  /* border: 2px solid red; */
+}
+
+.teams-container {
+  position: relative;
+  width: 45%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  gap: 1%;
   /* border: 2px solid blue; */
-  /* transform: rotate(-70deg);
-  background: var(--accents, #00B2FF);
-  box-shadow: 0px 0px 21.5px 0px var(--accents, #00B2FF);
-  border: 0.5vw solid var(--accents); */
+}
+
+/* .teams-container div {
+  border: 2px solid green;
+} */
+
+.teams-container-image {
+  position: relative;
+  display: flex;
+  height: 30%;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  /* border: 2px solid yellow; */
+}
+
+.teams-container-image-content {
+  position: relative;
+  height: 100%;
+  filter: var(--accentFilter);
+  /* border: 2px solid yellow; */
+}
+
+@keyframes shapeWiggle {
+  0% {
+    transform: translate(0%, 0%) rotate(0deg);
+  }
+
+  20% {
+    transform: translate(1%, 2%) rotate(2deg);
+  }
+
+  40% {
+    transform: translate(2%, 0%) rotate(-2deg);
+  }
+
+  60% {
+    transform: translate(0%, 1%) rotate(2deg);
+  }
+
+  80% {
+    transform: translate(2%, 1%) rotate(-2deg);
+  }
+
+  100% {
+    transform: translate(0%, 0%) rotate(0deg);
+  }
+}
+
+.teams-container-shape {
+  position: absolute;
+  height: calc((1vw/1vh)*2);
+}
+
+#teams-container-shape-1 {
+  top: 50%;
+  animation: shapeWiggle 2s linear infinite;
+}
+
+#teams-container-shape-2 {
+  top: 15%;
+  animation: shapeWiggle 2s linear infinite reverse;
+}
+
+#teams-container-shape-3 {
+  top: 15%;
+  left: 75%;
+  animation: shapeWiggle 2s linear infinite alternate-reverse;
+}
+
+#teams-container-shape-4 {
+  top: 50%;
+  left: 70%;
+  animation: shapeWiggle 2s linear infinite reverse;
+}
+
+.teams-container-sub {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+}
+
+.teams-container-sub-team {
+  position: relative;
+  color: var(--accents);
+  font-size: var(--teamTxt);
+}
+
+.teams-container-sub-focus {
+  position: relative;
+  color: white;
+  font-size: var(--focusTxt);
+  overflow: hidden;
+  text-overflow: clip;
+  text-wrap: pretty;
+  max-height: 100px;
+}
+
+.teams-container-sub-button {
+  position: relative;
+  width: min-content;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: .5%;
+  padding-bottom: .5%;
+  height: 100%;
+  border-radius: 10px;
+  border: 2px solid var(--clear);
+  background: var(--gray-2, #1E1E1E);
+  color: var(--accents);
+  font-size: var(--btnTxt);
+  text-wrap: nowrap;
+  transition: all .2s ease-in-out;
+  cursor: pointer;
+}
+
+.teams-container-sub-button:hover {
+  box-shadow: 0px 0px 5px 1px var(--glow);
+  color: var(--glow);
+}
+
+@media screen and (max-width: 1200px) {
+  .teams {
+    flex-direction: column;
+    gap: 0%;
+    /* border: 2px solid red; */
+  }
+
+  .teams-container {
+    /* border: 2px solid blue; */
+    height: 50%;
+    width: 100%;
+  }
+
+  .teams-container-image {
+    height: 50%;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  #teams-container-shape-1 {
+    top: 50%;
+    left: 15%;
+    animation: shapeWiggle 2s linear infinite;
+  }
+
+  #teams-container-shape-2 {
+    top: 15%;
+    left: 10%;
+    animation: shapeWiggle 2s linear infinite reverse;
+  }
+
+  .teams-container-shape {
+    height: 25%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .teams-container-shape {
+    display: none;
+  }
 }
