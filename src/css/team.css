@@ -1,0 +1,51 @@
+:root {
+    --gray2: #1E1E1E;
+    --accents: #00B2FF;
+    --background: #404040;
+    --glow: #24FF00;
+    --accentFilter: invert(67%) sepia(75%) saturate(5454%) hue-rotate(171deg) brightness(107%) contrast(103%);
+    --teamTxt: 40px;
+    --focusTxt: 20px;
+    --btnTxt: 25px;
+}
+
+.main {
+    position: relative;
+    height: calc(100% - 7.4%);
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 0%;
+    /* border: 2px solid red; */
+}
+
+.header {
+    background-color: var(--gray2);
+}
+
+.header-section-button {
+    background-color: black;
+}
+
+.sidemenu {
+    position: relative;
+    width: 20%;
+    height: 100%;
+    background-color: var(--gray2);
+}
+
+.content {
+    position: relative;
+    height: 100%;
+    width: 80%;
+    box-shadow: 5px 5px 5px 0px var(--accents);
+    /* border: 2px solid red; */
+}
+
+@media screen and (max-width: 1000px) {
+    .sidemenu {
+        width: 25%;
+    }
+}

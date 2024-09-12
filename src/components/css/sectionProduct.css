@@ -1,0 +1,55 @@
+:root {
+    --gray2: #1E1E1E;
+    --accents: #00B2FF;
+    --background: #404040;
+    --glow: #24FF00;
+    --accentFilter: invert(67%) sepia(75%) saturate(5454%) hue-rotate(171deg) brightness(107%) contrast(103%);
+    --teamTxt: 40px;
+    --focusTxt: 20px;
+    --btnTxt: 25px;
+}
+
+.sectionProduct {
+    position: relative;
+    height: 30px;
+    width: 90%;
+    left: 5%;
+    background-color: black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.sectionProduct-image1 {
+    position: relative;
+    height: 80%;
+    top: 10%;
+    margin-left: 2%;
+    filter: var(--accentFilter);
+    /* border: 2px solid red; */
+}
+
+.sectionProduct-image2 {
+    position: relative;
+    height: 80%;
+    top: 10%;
+    margin-right: 2%;
+    filter: var(--accentFilter);
+    /* border: 2px solid red; */
+}
+
+.sectionProduct-name {
+    position: relative;
+    color: white;
+    text-wrap: nowrap;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    font-size: 15px;
+    text-indent: 2%;
+    text-overflow: ellipsis;
+    /* border: 2px solid red; */
+}

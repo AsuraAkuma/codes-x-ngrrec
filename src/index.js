@@ -7,11 +7,16 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import Team from './pages/team';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+  },
+  {
+    path: "/team",
+    element: <Team />,
   }
 ]);
 

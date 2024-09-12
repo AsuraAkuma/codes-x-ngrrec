@@ -8,7 +8,7 @@ const Home = () => {
     const targetId = event.target.id;
     // Check if targetId is valid if true procede to page, else return
     if (targetId === "team-1") {
-      window.location.pathname = "/team1";
+      window.location.pathname = "/team";
     } else if (targetId === "team-2") {
       window.location.href = ""; //Girls site link
     } else if (targetId === "sign-in") {
@@ -18,7 +18,7 @@ const Home = () => {
     }
   };
   return (
-    <div className="home">
+    <div className="body">
       {/* Divider line */}
       <div className='divider-container'>
         <img src='/media/divider line.svg' alt='divider line' className='divider' />
