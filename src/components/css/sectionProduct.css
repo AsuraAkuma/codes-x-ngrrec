@@ -11,19 +11,25 @@
 
 .sectionProduct {
     position: relative;
-    height: 30px;
+    height: min-content;
     width: 90%;
     left: 5%;
     background-color: black;
     border-radius: 10px;
     display: flex;
     flex-direction: row;
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+    align-items: center;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    border: 2px solid #00000000;
+    transition: all .2s ease-in-out;
 }
 
 .sectionProduct-image1 {
     position: relative;
-    height: 80%;
-    top: 10%;
+    height: 30px;
     margin-left: 2%;
     filter: var(--accentFilter);
     /* border: 2px solid red; */
@@ -31,8 +37,8 @@
 
 .sectionProduct-image2 {
     position: relative;
-    height: 80%;
-    top: 10%;
+    height: 30px;
+    /* top: 10%; */
     margin-right: 2%;
     filter: var(--accentFilter);
     /* border: 2px solid red; */
@@ -41,15 +47,28 @@
 .sectionProduct-name {
     position: relative;
     color: white;
-    text-wrap: nowrap;
-    height: 100%;
+    height: min-content;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-content: center;
     font-size: 15px;
-    text-indent: 2%;
-    text-overflow: ellipsis;
+    margin-left: 2%;
+    overflow: hidden;
     /* border: 2px solid red; */
+
+}
+
+.sectionProduct:hover {
+    box-shadow: 0px 0px 5px 1px var(--glow);
+    /* border: 2px solid var(--glow); */
+}
+
+.sectionProduct-mask {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+
 }
