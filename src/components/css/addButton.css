@@ -1,0 +1,55 @@
+:root {
+    --gray2: #1E1E1E;
+    --accents: #00B2FF;
+    --background: #404040;
+    --glow: #24FF00;
+    --clear: #00000000;
+    --hdrBtnTxt: 25px;
+    --hdrNameTxt: 35px;
+    --accentFilter: invert(67%) sepia(75%) saturate(5454%) hue-rotate(171deg) brightness(107%) contrast(103%);
+}
+
+.addButton {
+    position: relative;
+    height: 40px;
+    width: 90%;
+    left: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    border-radius: 10px;
+    border: 2px solid var(--clear);
+    margin-top: 4%;
+    transition: all .2s ease-in-out;
+}
+
+.addButton-image {
+    position: relative;
+    height: 70%;
+    padding-left: 2%;
+    padding-right: 2%;
+    filter: var(--accentFilter);
+}
+
+.addButton-text {
+    position: relative;
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+}
+
+.addButton:hover,
+.active {
+    box-shadow: 0px 0px 5px 1px var(--glow);
+    /* border: 2px solid var(--glow); */
+}
+
+.addButton-mask {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}

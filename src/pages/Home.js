@@ -12,7 +12,14 @@ const Home = () => {
     } else if (targetId === "team-2") {
       window.location.href = ""; //Girls site link
     } else if (targetId === "sign-in") {
-      window.location.href = ""; //Girls site link
+      //sign in link
+      console.log(window.location.origin);
+      if (window.location.origin == "http://localhost:3001") {
+        window.location.pathname = "/signin";
+      } else {
+        window.location.href = "";
+
+      }
     } else {
       return;
     }

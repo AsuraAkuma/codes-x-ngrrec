@@ -3,6 +3,7 @@ import Header from '../components/header';
 import SectionContainer from '../components/SectionContainer';
 import '../css/base.css';
 import '../css/team.css';
+import AddButton from '../components/addButton';
 
 const Team = () => {
     const [sections, setSections] = useState([
@@ -39,11 +40,7 @@ const Team = () => {
             <Header />
             <div className='main'>
                 <section className='sidemenu'>
-                    <div className='sidemenu-button-container'>
-                        <img src='./media/'></img>
-                        {/* image before and after button text */}
-                    </div>
-                    <button className='sidemenu-button' id='add-section'>Add Section</button>
+                    <AddButton buttonText={"Add Section"} />
                     {sectionComps}
                 </section>
                 <section className='content'>

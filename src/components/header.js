@@ -6,13 +6,24 @@ const Header = () => {
     // logic
     const [signedIn, setSignedIn] = useState(false);
     const buttonText = (signedIn) ? "Sign Out" : "Sign In";
-    const memberKey = window.localStorage.getItem('memberKey');
-    if (memberKey === null) {
-        setSignedIn(false);
-        window.localStorage.setItem('memberKey', undefined);
-    } else if (memberKey !== "null" && memberKey !== "undefined" && !signedIn) {
-        setSignedIn(true);
-    }
+    const handleClick = (event) => {
+        // Get id of element
+        const targetId = event.target.id;
+        // Check if targetId is valid if true procede to page, else return
+        if (targetId === "header-section-button-signIn") {
+            //sign in link
+            console.log(window.location.origin);
+            if (window.location.origin == "http://localhost:3001") {
+                window.location.pathname = "/signin";
+            } else {
+                window.location.href = "";
+
+            }
+        } else {
+            return;
+        }
+    };
+
     // return html element
     return (
         <div className="header" id="header">
@@ -20,7 +31,7 @@ const Header = () => {
                 <h1 className="header-name-text">CODES x NGRREC</h1>
             </section>
             <section className="header-section" id="header-section-signIn">
-                <button className="header-section-button" id="header-section-button-signIn">{buttonText}</button>
+                <button onClick={handleClick} className="header-section-button" id="header-section-button-signIn">{buttonText}</button>
             </section>
         </div>
     )

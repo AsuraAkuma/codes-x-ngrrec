@@ -1,0 +1,66 @@
+:root {
+    --gray2: #1E1E1E;
+    --accents: #00B2FF;
+    --background: #404040;
+    --glow: #24FF00;
+    --accentFilter: invert(67%) sepia(75%) saturate(5454%) hue-rotate(171deg) brightness(107%) contrast(103%);
+    --teamTxt: 40px;
+    --focusTxt: 20px;
+    --btnTxt: 25px;
+    --headerTxt: 35px;
+}
+
+.signIn {
+    position: relative;
+    width: 40%;
+    height: 100%;
+    left: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* border: 2px solid red; */
+}
+
+.signIn-form {
+    position: relative;
+    background-color: var(--gray2);
+    border-radius: 10px;
+    width: 100%;
+    height: min-content;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 1%;
+    padding-bottom: 2%;
+    border: 2px solid #00000000;
+    box-shadow: 0px 10px 10px var(--accents);
+}
+
+.signIn-header {
+    position: relative;
+    color: white;
+    width: 100%;
+    text-align: center;
+    font-size: var(--headerTxt);
+}
+
+.signIn-form-button {
+    position: relative;
+    background-color: black;
+    color: var(--accents);
+    border-radius: 10px;
+    height: min-content;
+    width: 80%;
+    left: 10%;
+    padding: 1%;
+    font-size: var(--btnTxt);
+    border: 2px solid #00000000;
+    margin-top: 10px;
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+}
+
+.signIn-form-button:hover {
+    box-shadow: 0px 0px 10px var(--glow);
+    color: var(--glow);
+}
