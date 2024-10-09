@@ -4,7 +4,7 @@ import { useState } from 'react';
 import SectionProduct from './sectionProduct';
 
 const SectionContainer = (props) => {
-    let productComps = props.contents.products.map((v, i) => <SectionProduct name={v.name} type={v.type} />);
+    let productComps = props.contents.products.map((v, i) => <SectionProduct name={v.name} type={v.type} key={v.name} />);
     return (
         <div className='sectionContainer'>
             <div className='sectionContainer-header'>

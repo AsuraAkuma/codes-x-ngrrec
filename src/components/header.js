@@ -13,7 +13,7 @@ const Header = () => {
         if (targetId === "header-section-button-signIn") {
             //sign in link
             console.log(window.location.origin);
-            if (window.location.origin == "http://localhost:3001") {
+            if (window.location.origin == "http://localhost:3000") {
                 window.location.pathname = "/signin";
             } else {
                 window.location.href = "";
