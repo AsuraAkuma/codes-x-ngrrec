@@ -1,8 +1,12 @@
 import '../css/signIn.css';
 import '../css/base.css';
 import LabeledInput from '../components/labeledInput';
+import { useState } from 'react';
+import ErrorMessage from '../components/error';
 
 const SignIn = () => {
+    const [showError, setShowError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
     async function handleSubmit(event) {
         event.preventDefault();
         const formData = new FormData(event.target);
@@ -18,9 +22,14 @@ const SignIn = () => {
         const response = await req.json();
         if (response.success) {
             window.location.pathname = "/team";
+        } else {
+            setShowError(true);
+            setErrorMessage(response.error);
         }
     }
-
+    function goToSignUp() {
+        window.location.pathname = "/signup";
+    }
     return (
         <div className='body'>
             <div className='signIn'>
@@ -29,8 +38,10 @@ const SignIn = () => {
                     <LabeledInput labelText={"Username"} inputName={"username"} inputType={"text"} required={true} />
                     <LabeledInput labelText={"Password"} inputName={"password"} inputType={"password"} required={true} />
                     <button className='signIn-form-button' id='signIn-form-submit' type='submit'>Sign In</button>
+                    <p className='signIn-jump' onClick={goToSignUp}>Not signed up? Register</p>
                 </form>
             </div>
+            <ErrorMessage />
         </div>
     )
 }
