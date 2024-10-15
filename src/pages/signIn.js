@@ -25,6 +25,10 @@ const SignIn = () => {
         } else {
             setShowError(true);
             setErrorMessage(response.error);
+            setTimeout(() => {
+                setShowError(false);
+                setErrorMessage("");
+            }, 5000);
         }
     }
     function goToSignUp() {
@@ -41,7 +45,7 @@ const SignIn = () => {
                     <p className='signIn-jump' onClick={goToSignUp}>Not signed up? Register</p>
                 </form>
             </div>
-            <ErrorMessage />
+            <ErrorMessage showing={showError} message={errorMessage} />
         </div>
     )
 }

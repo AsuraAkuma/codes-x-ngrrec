@@ -6,6 +6,7 @@
     --clear: #00000000;
     --hdrBtnTxt: 25px;
     --hdrNameTxt: 35px;
+    --errorTxt: #f85050;
     --accentFilter: invert(67%) sepia(75%) saturate(5454%) hue-rotate(171deg) brightness(107%) contrast(103%);
 }
 
@@ -18,13 +19,14 @@
     flex-direction: column;
     justify-content: center;
     background-color: var(--gray2);
+    box-shadow: 0px -5px 10px 0px red;
 }
 
 .error-message {
     position: relative;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: var(--errorTxt);
     margin-left: 1%;
     height: min-content;
     width: 99%;
@@ -33,4 +35,8 @@
     text-wrap: nowrap;
     font-size: 25px;
     /* border: 2px solid red; */
+}
+
+.hidden {
+    display: none;
 }

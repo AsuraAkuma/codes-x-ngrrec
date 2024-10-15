@@ -6,13 +6,20 @@ const Header = () => {
     // logic
     const [signedIn, setSignedIn] = useState(false);
     const buttonText = (signedIn) ? "Sign Out" : "Sign In";
+    // Check if signed in
+    isSignedIn();
+    async function isSignedIn() {
+        const req = await fetch(`http://localhost:5500/api/login/getuser`);
+        const res = await req.json();
+        console.log(res);
+    }
+
     const handleClick = (event) => {
         // Get id of element
         const targetId = event.target.id;
         // Check if targetId is valid if true procede to page, else return
         if (targetId === "header-section-button-signIn") {
             //sign in link
-            console.log(window.location.origin);
             if (window.location.origin == "http://localhost:3000") {
                 window.location.pathname = "/signin";
             } else {

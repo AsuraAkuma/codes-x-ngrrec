@@ -2,11 +2,11 @@ import React from "react";
 import './css/error.css'
 import '../css/base.css'
 
-const ErrorMessage = () => {
+const ErrorMessage = ({ showing, message }) => {
 
     return (
-        <div className="error" id="error">
-            <p className="error-message" id="error-message">Error: Test</p>
+        <div className={(showing) ? "error" : "error hidden"} id="error">
+            <p className="error-message" id="error-message">Error: {message}</p>
         </div>
     )
 }
