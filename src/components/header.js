@@ -1,27 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './css/header.css'
 import '../css/base.css'
 // %PUBLIC_URL%
 const Header = () => {
     // logic
-    const [signedIn, setSignedIn] = useState(isSignedIn());
-    const buttonText = (signedIn) ? "Sign Out" : "Sign In";
+    const [signedIn, setSignedIn] = useState();
+    const buttonText = (signedIn === true) ? "Sign Out" : "Sign In";
     // Check if signed in
-    async function isSignedIn() {
-        return (sessionStorage.getItem('sessionKey')) ? true : false;
+    function isSignedIn() {
+        setSignedIn((sessionStorage.getItem('sessionKey')) ? true : false);
     }
-
+    useEffect(() => {
+        isSignedIn()
+    }, [])
     const handleClick = (event) => {
         // Get id of element
         const targetId = event.target.id;
         // Check if targetId is valid if true procede to page, else return
         if (targetId === "header-section-button-signIn") {
-            //sign in link
-            if (window.location.origin == "http://localhost:3000") {
-                window.location.pathname = "/signin";
+            if (signedIn === true) {
+                sessionStorage.clear();
+                window.location.pathname = "/";
             } else {
-                window.location.href = "";
-
+                //sign in link
+                window.location.pathname = "/signin";
             }
         } else {
             return;

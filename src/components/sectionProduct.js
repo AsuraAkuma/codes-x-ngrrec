@@ -3,7 +3,8 @@ import '../css/base.css';
 import ProductComment from './comment';
 import './css/sectionProduct.css';
 
-const SectionProduct = ({ name, type, section }) => {
+const SectionProduct = ({ name, type, section, cancelSection, cancelProduct }) => {
+    const createContainer = document.getElementById('create-container');
     let image;
     switch (type) {
         case 'image':
@@ -22,37 +23,16 @@ const SectionProduct = ({ name, type, section }) => {
             image = './media/file-solid.svg'; //make document image
             break;
     }
+
     // Show product container
     const showProduct = async () => {
-        // Get product info
-        const iframe = document.getElementById('content-product-file-iframe');
-        const container = document.getElementById('content-product-file');
-        if (type === "image") {
-            const img = new Image();
-            img.src = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`;
-            img.onload = () => {
-                iframe.height = img.height;
-                iframe.width = img.width;
-                iframe.src = img.src;
-                console.log(iframe.height < container.clientHeight)
-                if (iframe.height > container.clientHeight || iframe.width > container.clientWidth) {
-                    container.style.display = '';
-                    container.style.justifyContent = '';
-                    container.style.alignItems = '';
-                } else {
-                    container.style.display = 'flex';
-                    container.style.justifyContent = 'center';
-                    container.style.alignItems = 'center';
-                }
-            }
-        } else if (type === "document" || type === "video") {
-            iframe.src = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`
-            iframe.height = '100%';
-            iframe.width = '100%';
-            container.style.height = '75%';
-        } else if (type === "audio") {
-            iframe.src = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`;
-        }
+        cancelSection();
+        cancelProduct();
+        // Hide create-container
+        createContainer.style.display = 'none';
+        // Show product section
+        const productContainer = document.getElementById('content-product');
+        productContainer.style.display = 'block';
         // Set header text
         const header = document.getElementById('content-product-header');
         header.innerHTML = `${section} - ${name}`;
@@ -73,6 +53,36 @@ const SectionProduct = ({ name, type, section }) => {
         // Set current product
         sessionStorage.setItem('currentProduct', name);
         sessionStorage.setItem('currentSection', section);
+        sessionStorage.setItem('currentProductDescription', res.description);
+        sessionStorage.setItem('currentProductType', res.type);
+        // Get product info
+        const iframe = document.getElementById('content-product-file-iframe');
+        const container = document.getElementById('content-product-file');
+        if (type === "image") {
+            const img = new Image();
+            img.src = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`;
+            img.onload = () => {
+                iframe.height = img.height;
+                iframe.width = img.width;
+                iframe.src = img.src;
+                if (iframe.height > container.clientHeight || iframe.width > container.clientWidth) {
+                    container.style.display = '';
+                    container.style.justifyContent = '';
+                    container.style.alignItems = '';
+                } else {
+                    container.style.display = 'flex';
+                    container.style.justifyContent = 'center';
+                    container.style.alignItems = 'center';
+                }
+            }
+        } else if (type === "document" || type === "video") {
+            iframe.src = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`
+            iframe.height = '100%';
+            iframe.width = '100%';
+            container.style.height = '75%';
+        } else if (type === "audio") {
+            iframe.src = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`;
+        }
     }
     return (
         <div className='sectionProduct' onClick={showProduct}>
