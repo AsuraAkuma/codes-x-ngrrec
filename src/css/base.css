@@ -3,6 +3,17 @@
     src: url('../font.ttf');
 }
 
+:root {
+    --gray2: #1E1E1E;
+    --accents: #00B2FF;
+    --background: #404040;
+    --glow: #24FF00;
+    --accentFilter: invert(67%) sepia(75%) saturate(5454%) hue-rotate(171deg) brightness(107%) contrast(103%);
+    --teamTxt: 40px;
+    --focusTxt: 20px;
+    --btnTxt: 25px;
+}
+
 * {
     margin: 0px;
     padding: 0px;
@@ -21,4 +32,39 @@
     height: 100vh;
     width: 100vw;
     background: linear-gradient(99deg, rgba(0, 0, 0, 0.00) 85%, rgba(36, 255, 0, 0.20) 100%), linear-gradient(261deg, rgba(0, 0, 0, 0.00) 85%, rgba(36, 255, 0, 0.20) 100%), var(--Background, #404040);
+}
+
+/* Scrollbar Styles */
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--background);
+    width: 3px;
+    height: 3px;
+    border-radius: 3px;
+    display: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--accents);
+    width: 3px;
+    height: 3px;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--glow);
+    width: 3px;
+    height: 3px;
+}
+
+::-webkit-scrollbar-corner {
+    display: none;
 }

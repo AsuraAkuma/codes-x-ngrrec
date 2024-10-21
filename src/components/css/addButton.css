@@ -47,6 +47,10 @@
     /* border: 2px solid var(--glow); */
 }
 
+.addButton:hover .addButton-text {
+    color: var(--glow);
+}
+
 .addButton-mask {
     position: absolute;
     height: 100%;

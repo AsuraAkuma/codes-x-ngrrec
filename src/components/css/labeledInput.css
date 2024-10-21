@@ -40,7 +40,11 @@
 }
 
 .labeledInput-input:hover,
-.labeledInput-input:focus {
+.labeledInput-input:focus,
+.labeledInput-input-textarea:hover,
+.labeledInput-input-textarea:focus,
+.labeledInput-input-select:hover,
+.labeledInput-input-select:focus {
     box-shadow: 0px 0px 10px var(--glow);
     color: var(--glow);
 }
@@ -66,4 +70,34 @@
 
 .forgotPassword:hover {
     color: var(--glow);
+}
+
+.labeledInput-input-textarea {
+    position: relative;
+    background-color: black;
+    color: white;
+    height: min-content;
+    font-size: 15px;
+    border-radius: 10px;
+    padding: 1%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    border: 2px solid #00000000;
+    cursor: text;
+    transition: all .2s ease-in-out;
+}
+
+.labeledInput-input-select {
+    position: relative;
+    background-color: black;
+    color: white;
+    height: min-content;
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 1%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    border: 2px solid #00000000;
+    cursor: default;
+    transition: all .2s ease-in-out;
 }

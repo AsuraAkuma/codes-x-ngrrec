@@ -4,14 +4,11 @@ import '../css/base.css'
 // %PUBLIC_URL%
 const Header = () => {
     // logic
-    const [signedIn, setSignedIn] = useState(false);
+    const [signedIn, setSignedIn] = useState(isSignedIn());
     const buttonText = (signedIn) ? "Sign Out" : "Sign In";
     // Check if signed in
-    isSignedIn();
     async function isSignedIn() {
-        const req = await fetch(`http://localhost:5500/api/login/getuser`);
-        const res = await req.json();
-        console.log(res);
+        return (sessionStorage.getItem('sessionKey')) ? true : false;
     }
 
     const handleClick = (event) => {
