@@ -118,10 +118,9 @@ const Team = () => {
     };
     const deleteSectionForm = async (event) => {
         event.preventDefault();
-        if (!window.confirm(`Do you wish to delete the section "${sessionStorage.getItem('currentProduct')}" and all products in it?`)) {
+        if (!window.confirm(`Do you wish to delete the section "${sessionStorage.getItem('currentSection')}" and all products in it?`)) {
             return;
         }
-        const formData = new FormData(event.target);
         const currentSection = sessionStorage.getItem('currentSection');
         const req = await fetch(`http://localhost:5500/api/section/delete`, {
             method: 'POST',
@@ -152,12 +151,14 @@ const Team = () => {
 
     const cancelProductForm = () => {
         if (productFormContainer.style.display === 'flex') {
+            const textArea = document.getElementById('labeledInput-input-productDescription')
             productFormContainer.style.display = 'none';
             createContainer.style.display = 'none';
             const productHeader = document.getElementById('create-section-header');
             const productButton = document.getElementById('create-section-form-button');
             productHeader.innerHTML = "Create Product";
             productButton.innerHTML = "Create Product";
+            textArea.style.height = 'min-content';
             productForm.reset();
             if (isEditing === true) {
                 setIsEditing(false);
@@ -205,16 +206,16 @@ const Team = () => {
             sessionStorage.setItem('currentProductType', type);
             if (formData.get('productFile').size > 0) {
                 // Set image
-                const iframe = document.getElementById('content-product-file-iframe');
+                const objectViewer = document.getElementById('content-product-file-objectViewer');
                 const container = document.getElementById('content-product-file');
                 if (type === "image") {
                     const img = new Image();
                     img.src = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`;
                     img.onload = () => {
-                        iframe.height = img.height;
-                        iframe.width = img.width;
-                        iframe.src = img.src;
-                        if (iframe.height > container.clientHeight || iframe.width > container.clientWidth) {
+                        objectViewer.height = img.height;
+                        objectViewer.width = img.width;
+                        objectViewer.data = img.src;
+                        if (objectViewer.height > container.clientHeight || objectViewer.width > container.clientWidth) {
                             container.style.display = '';
                             container.style.justifyContent = '';
                             container.style.alignItems = '';
@@ -225,12 +226,15 @@ const Team = () => {
                         }
                     }
                 } else if (type === "document" || type === "video") {
-                    iframe.src = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`
-                    iframe.height = '100%';
-                    iframe.width = '100%';
+                    objectViewer.data = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`
+                    objectViewer.height = '100%';
+                    objectViewer.width = '100%';
                     container.style.height = '75%';
                 } else if (type === "audio") {
-                    iframe.src = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`;
+                    objectViewer.data = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`;
+                    container.style.display = 'flex';
+                    container.style.justifyContent = 'center';
+                    container.style.alignItems = 'center';
                 }
             }
             cancelProductForm();
@@ -315,11 +319,14 @@ const Team = () => {
     }
     // Change textarea input size
     const changeSize = ({ target }) => {
-        const mainDiv = document.getElementById('main')
-        const lineHeight = (mainDiv.clientHeight * .01) + 20;
-        const rows = parseInt((target.scrollHeight / lineHeight).toString().split(".")[0]);
-        if (rows < 5) {
-            target.style.height = target.scrollHeight + 'px';
+        const targetElement = document.getElementById(target.id);
+        const mainDiv = document.getElementById('main');
+        targetElement.style.height = 'min-content';
+        if (targetElement.scrollHeight < mainDiv.clientHeight * .25) {
+            targetElement.style.height = targetElement.scrollHeight + 'px';
+        }
+        if (targetElement.scrollHeight >= mainDiv.clientHeight * .25) {
+            targetElement.style.height = mainDiv.clientHeight * .25 + 'px';
         }
     }
 
@@ -458,8 +465,10 @@ const Team = () => {
                             Lorem ipsum odor amet, consectetuer adipiscing elit. Pulvinar dictum orci egestas suscipit libero ridiculus. Curae eleifend morbi netus; cursus mattis sit. Suscipit consectetur nisl nulla curae ultricies ridiculus; id penatibus ac. Laoreet primis rutrum mollis nisl class interdum vulputate. Fames odio in fringilla eros finibus sapien. Himenaeos hendrerit sem risus orci faucibus nullam. Ligula nullam pharetra fusce vel auctor, maecenas magna nec.
                         </p>
                         <div className='content-product-file' id='content-product-file'>
-                            {/* <iframe className='content-product-file-iframe' id='content-product-file-iframe' title='product-file-viewer' src='' sandbox='' scrolling="no" /> */}
-                            <object className='content-product-file-objectViewer' id='content-product-file-objectViewer' type="" data='http://localhost:5500/api/product/file/Test%20Product%203/Test%20Section%201/69469260'></object>
+                            {/* <objectViewer className='content-product-file-objectViewer' id='content-product-file-objectViewer' title='product-file-viewer' src='' sandbox='' scrolling="no" /> */}
+                            <audio className='content-product-file-objectViewer' id='content-product-file-audioViewer' src='' autoPlay={false} controls />
+                            <video className='content-product-file-objectViewer' id='content-product-file-videoViewer' src='' autoPlay={false} controls />
+                            <object className='content-product-file-objectViewer' id='content-product-file-objectViewer' type="" data='' ></object>
                         </div>
                         <div className='content-product-comment'>
                             <div className='content-product-comment-send-container'>

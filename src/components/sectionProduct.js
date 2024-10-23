@@ -44,7 +44,9 @@ const SectionProduct = ({ name, type, section, cancelSection, cancelProduct }) =
         description.innerHTML = `${res.description}`;
         // Reset comments
         const commentContainer = document.getElementById('content-product-comments');
+        const commentInput = document.getElementById('content-product-comment-text');
         commentContainer.innerHTML = "";
+        commentInput.value = "";
         // generate comments
         if (res.comments.length > 0) {
             const comments = res.comments.map((v, i) => <ProductComment author={v.author} timestamp={v.timestamp} content={v.content} />);
@@ -57,11 +59,18 @@ const SectionProduct = ({ name, type, section, cancelSection, cancelProduct }) =
         sessionStorage.setItem('currentProductType', res.type);
         // Set image
         const objectViewer = document.getElementById('content-product-file-objectViewer');
+        const audioViewer = document.getElementById('content-product-file-audioViewer');
+        const videoViewer = document.getElementById('content-product-file-videoViewer');
         const container = document.getElementById('content-product-file');
         if (type === "image") {
             const img = new Image();
             img.src = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`;
             img.onload = () => {
+                // Show/hide viewers
+                objectViewer.style.display = 'block';
+                audioViewer.style.display = 'none';
+                videoViewer.style.display = 'none';
+                // Set dimensions
                 objectViewer.height = img.height;
                 objectViewer.width = img.width;
                 container.style.height = img.height + 'px';
@@ -76,16 +85,40 @@ const SectionProduct = ({ name, type, section, cancelSection, cancelProduct }) =
                     container.style.alignItems = 'center';
                 }
             }
-        } else if (type === "document" || type === "video") {
-            // objectViewer.data = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`
-            console.log(objectViewer.height)
-            // objectViewer.height = objectViewer.scrollTop + 'px';
-            // objectViewer.style.height = '100%'
-            objectViewer.scroll(0, 50)
+        } else if (type === "document") {
+            // Show/hide viewers
+            objectViewer.style.display = 'block';
+            audioViewer.style.display = 'none';
+            videoViewer.style.display = 'none';
+            objectViewer.data = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`
+            objectViewer.height = '100%'
             objectViewer.width = '100%';
             container.style.height = '75%';
+            container.style.overflow = 'none';
+        } else if (type === "video") {
+            // Show/hide viewers
+            objectViewer.style.display = 'none';
+            audioViewer.style.display = 'none';
+            videoViewer.style.display = 'block';
+            videoViewer.src = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`
+            videoViewer.style.height = '100%'
+            videoViewer.style.width = '100%';
+            container.style.height = '75%';
+            container.style.overflow = 'none';
+            videoViewer.volume = 0.2;
         } else if (type === "audio") {
-            objectViewer.data = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`;
+            // Show/hide viewers
+            objectViewer.style.display = 'none';
+            audioViewer.style.display = 'block';
+            videoViewer.style.display = 'none';
+            audioViewer.style.height = '100%'
+            audioViewer.style.width = '50%';
+            audioViewer.src = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`;
+            container.style.height = '20%';
+            container.style.display = 'flex';
+            container.style.justifyContent = 'center';
+            container.style.alignItems = 'center';
+            audioViewer.volume = 0.2;
         }
     }
     return (

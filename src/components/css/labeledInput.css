@@ -75,15 +75,17 @@
     background-color: black;
     color: white;
     font-size: 20px;
+    height: auto;
     border-radius: 10px;
-    padding: 1%;
-    min-height: min-content;
+    padding: 0.5%;
+    align-content: center;
     overflow-x: hidden;
     overflow-y: auto;
     max-height: 70%;
     border: 2px solid #00000000;
     cursor: text;
     resize: none;
+    line-clamp: 5;
     transition: all .2s ease-in-out;
 }
 

@@ -17,12 +17,14 @@ const LabeledInput = ({ labelText, inputType, inputName, required, rows, selectO
     if (inputType === 'textarea') {
         // Change textarea input size
         const changeSize = ({ target }) => {
-            const mainDiv = document.getElementById('main')
-            const lineHeight = (mainDiv.clientHeight * .01) + 20;
-            const rows = parseInt((target.scrollHeight / lineHeight).toString().split(".")[0]);
-            if (rows < 5) {
-                target.style.height = 'min-content';
-                target.style.height = (target.scrollHeight) + 'px';
+            const targetElement = document.getElementById(target.id);
+            const mainDiv = document.getElementById('main');
+            targetElement.style.height = 'min-content';
+            if (targetElement.scrollHeight < mainDiv.clientHeight * .25) {
+                targetElement.style.height = targetElement.scrollHeight + 'px';
+            }
+            if (targetElement.scrollHeight >= mainDiv.clientHeight * .25) {
+                targetElement.style.height = mainDiv.clientHeight * .25 + 'px';
             }
         }
         newInput = (<textarea className='labeledInput-input-textarea' rows={(rows) ? rows : 1} id={inputId} required={required} type={inputType} placeholder={labelText} name={inputName} onInput={changeSize} />);

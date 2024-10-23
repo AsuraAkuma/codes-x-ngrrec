@@ -51,7 +51,7 @@
     width: 100%;
     overflow-x: hidden;
     overflow-y: auto;
-    /* display: none; */
+    display: none;
     /* border: 2px solid blue; */
 }
 
