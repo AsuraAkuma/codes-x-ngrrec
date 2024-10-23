@@ -78,3 +78,10 @@
 .signIn-jump:hover {
     color: var(--glow);
 }
+
+@media screen and (max-width: 600px) {
+    .signIn {
+        width: 80%;
+        left: 10%;
+    }
+}

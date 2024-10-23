@@ -57,3 +57,43 @@
     width: 100%;
     cursor: pointer;
 }
+
+@media screen and (max-width: 810px) {
+    .addButton-text {
+        font-size: 13px;
+    }
+
+    .addButton {
+        height: 35px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .addButton-text {
+        font-size: 12px;
+    }
+
+    .addButton {
+        height: 30px;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .addButton-text {
+        font-size: 10px;
+    }
+
+    .addButton {
+        height: 20px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .addButton-text {
+        font-size: 20px;
+    }
+
+    .addButton {
+        height: 40px;
+    }
+}

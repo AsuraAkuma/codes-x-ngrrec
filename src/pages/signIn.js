@@ -44,7 +44,7 @@ const SignIn = () => {
                     <LabeledInput labelText={"Username"} inputName={"username"} inputType={"text"} required={true} />
                     <LabeledInput labelText={"Password"} inputName={"password"} inputType={"password"} enableForgot={true} required={true} />
                     <button className='signIn-form-button' id='signIn-form-submit' type='submit'>Sign In</button>
-                    <p className='signIn-jump' onClick={goToSignUp}>Not signed up? Register</p>
+                    <p className='signIn-jump' onClick={goToSignUp}>Not signed up? Sign up</p>
                 </form>
             </div>
             <ErrorMessage showing={showError} message={errorMessage} />
