@@ -40,7 +40,7 @@ const SignUp = () => {
                     <h2 className='signIn-header'>Sign Up</h2>
                     <LabeledInput labelText={"Username"} inputName={"username"} inputType={"text"} required={true} />
                     <LabeledInput labelText={"Email"} inputName={"email"} inputType={"text"} required={true} />
-                    <LabeledInput labelText={"Password"} inputName={"password"} inputType={"password"} required={true} />
+                    <LabeledInput labelText={"Password"} inputName={"password"} inputType={"password"} enableForgot={false} required={true} />
                     <button className='signIn-form-button' id='signup-form-submit' type='submit'>Sign Up</button>
                     <p className='signIn-jump' onClick={goToSignIn}>Already signed up? Sign in</p>
                 </form>

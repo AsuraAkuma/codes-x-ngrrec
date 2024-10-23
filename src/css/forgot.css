@@ -36,6 +36,11 @@
     box-shadow: 0px 10px 10px var(--accents);
 }
 
+#forgot-form-code,
+#forgot-form-password {
+    display: none;
+}
+
 .forgot-header {
     position: relative;
     color: white;

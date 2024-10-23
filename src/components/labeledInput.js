@@ -2,13 +2,15 @@ import React from 'react';
 import './css/labeledInput.css'
 import '../css/base.css'
 
-const LabeledInput = ({ labelText, inputType, inputName, required, rows, selectOptions, selectCallback }) => {
+const LabeledInput = ({ labelText, inputType, inputName, required, rows, selectOptions, selectCallback, enableForgot }) => {
     const inputId = `labeledInput-input-${inputName}`;
     let forgotPassword;
-    if (inputType === "password") {
-        forgotPassword = (
-            <p className='forgotPassword' id='forgotPassword' onClick={forgot}>Forgot?</p>
-        )
+    if (inputType === "password" && enableForgot) {
+        if (enableForgot === true) {
+            forgotPassword = (
+                <p className='forgotPassword' id='forgotPassword' onClick={forgot}>Forgot?</p>
+            )
+        }
     }
     function forgot() {
         window.location.pathname = "/forgot"

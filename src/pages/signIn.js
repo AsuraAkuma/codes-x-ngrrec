@@ -42,7 +42,7 @@ const SignIn = () => {
                 <form className='signIn-form' id='signIn-form' onSubmit={handleSubmit}>
                     <h2 className='signIn-header'>Sign In</h2>
                     <LabeledInput labelText={"Username"} inputName={"username"} inputType={"text"} required={true} />
-                    <LabeledInput labelText={"Password"} inputName={"password"} inputType={"password"} required={true} />
+                    <LabeledInput labelText={"Password"} inputName={"password"} inputType={"password"} enableForgot={true} required={true} />
                     <button className='signIn-form-button' id='signIn-form-submit' type='submit'>Sign In</button>
                     <p className='signIn-jump' onClick={goToSignUp}>Not signed up? Register</p>
                 </form>
