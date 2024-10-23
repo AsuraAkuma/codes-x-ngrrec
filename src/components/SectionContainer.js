@@ -60,7 +60,7 @@ const SectionContainer = ({ contents, isManager, setEdit, isEditing, cancelSecti
     const showSectionForm = ({ target }) => {
         const headerText = document.getElementById('create-section-header');
         const button = document.getElementById('create-section-form-button');
-        const input = document.getElementById('labeledInput-button-sectionName');
+        const input = document.getElementById('labeledInput-input-sectionName');
         if (sectionFormContainer.style.display === '' || sectionFormContainer.style.display === 'none') {
             sectionFormContainer.style.display = 'flex';
             createContainer.style.display = 'flex';

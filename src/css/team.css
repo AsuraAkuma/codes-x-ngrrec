@@ -51,7 +51,7 @@
     width: 100%;
     overflow-x: hidden;
     overflow-y: auto;
-    display: none;
+    /* display: none; */
     /* border: 2px solid blue; */
 }
 
@@ -90,7 +90,7 @@
     /* border: 2px solid green; */
 }
 
-.content-product-file-iframe {
+.content-product-file-objectViewer {
     position: relative;
     border: none;
     overflow: visible;

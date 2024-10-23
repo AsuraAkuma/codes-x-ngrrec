@@ -116,6 +116,35 @@ const Team = () => {
             }, 5000);
         }
     };
+    const deleteSectionForm = async (event) => {
+        event.preventDefault();
+        if (!window.confirm(`Do you wish to delete the section "${sessionStorage.getItem('currentProduct')}" and all products in it?`)) {
+            return;
+        }
+        const formData = new FormData(event.target);
+        const currentSection = sessionStorage.getItem('currentSection');
+        const req = await fetch(`http://localhost:5500/api/section/delete`, {
+            method: 'POST',
+            mode: 'cors',
+            headers: { "Content-Type": 'application/json' },
+            body: JSON.stringify({
+                sessionKey: sessionStorage.getItem('sessionKey'),
+                target: currentSection
+            })
+        });
+        const response = await req.json();
+        if (response.success === true) {
+            getSections(); // Re-fetch sections after creating a new one
+            cancelSectionForm();
+        } else {
+            setShowError(true);
+            setErrorMessage(response.error);
+            setTimeout(() => {
+                setShowError(false);
+                setErrorMessage("");
+            }, 5000);
+        }
+    };
 
     // Cancel create section form
     const productForm = document.getElementById('create-product-form');
@@ -140,6 +169,16 @@ const Team = () => {
     const createProductForm = async (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
+        if (formData.get('productFile').size > 5000 * 1024 * 1024) {
+            setShowError(true);
+            setErrorMessage("File size too big, must be under 5Gb");
+            setTimeout(() => {
+                setShowError(false);
+                setErrorMessage("");
+            }, 5000);
+            return;
+        }
+        formData.append('target', sessionStorage.getItem('currentProduct'));
         const req = await fetch(`http://localhost:5500/api/product/${(isEditing === true) ? "edit" : "create"}`, {
             method: 'POST',
             mode: 'cors',
@@ -149,6 +188,51 @@ const Team = () => {
         const response = await req.json();
         if (response.success === true) {
             getSections(); // Re-fetch sections after creating a new one
+            const productContainer = document.getElementById('content-product');
+            productContainer.style.display = 'none';
+            const name = formData.get('productName');
+            const section = formData.get('section');
+            const type = formData.get('productType');
+            // Set header text
+            const header = document.getElementById('content-product-header');
+            header.innerHTML = `${section} - ${name}`;
+            // Set description text
+            const description = document.getElementById('content-product-description');
+            description.innerHTML = formData.get('productDescription');
+            sessionStorage.setItem('currentProduct', name);
+            sessionStorage.setItem('currentSection', section);
+            sessionStorage.setItem('currentProductDescription', formData.get('productDescription'));
+            sessionStorage.setItem('currentProductType', type);
+            if (formData.get('productFile').size > 0) {
+                // Set image
+                const iframe = document.getElementById('content-product-file-iframe');
+                const container = document.getElementById('content-product-file');
+                if (type === "image") {
+                    const img = new Image();
+                    img.src = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`;
+                    img.onload = () => {
+                        iframe.height = img.height;
+                        iframe.width = img.width;
+                        iframe.src = img.src;
+                        if (iframe.height > container.clientHeight || iframe.width > container.clientWidth) {
+                            container.style.display = '';
+                            container.style.justifyContent = '';
+                            container.style.alignItems = '';
+                        } else {
+                            container.style.display = 'flex';
+                            container.style.justifyContent = 'center';
+                            container.style.alignItems = 'center';
+                        }
+                    }
+                } else if (type === "document" || type === "video") {
+                    iframe.src = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`
+                    iframe.height = '100%';
+                    iframe.width = '100%';
+                    container.style.height = '75%';
+                } else if (type === "audio") {
+                    iframe.src = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`;
+                }
+            }
             cancelProductForm();
         } else {
             setShowError(true);
@@ -165,7 +249,6 @@ const Team = () => {
         if (!window.confirm(`Do you wish to delete the product "${sessionStorage.getItem('currentProduct')}"?`)) {
             return;
         }
-        const formData = new FormData(event.target);
         const req = await fetch(`http://localhost:5500/api/product/delete`, {
             method: 'POST',
             mode: 'cors',
@@ -178,8 +261,8 @@ const Team = () => {
         });
         const response = await req.json();
         if (response.success === true) {
-            const productContainer = document.getElementById('create-product');
-            productContainer.display = 'none';
+            const productContainer = document.getElementById('content-product');
+            productContainer.style.display = 'none';
             getSections(); // Re-fetch sections after creating a new one
             cancelProductForm();
         } else {
@@ -218,7 +301,7 @@ const Team = () => {
     const productElements = productTypes.map((v, i) => <option key={v.value} value={v.value}>{v.name}</option>);
     // Select callback
     const selectCallback = ({ target }) => {
-        const fileInput = document.getElementById(`labeledInput-button-file`);
+        const fileInput = document.getElementById(`labeledInput-input-productFile`);
         if (target.value === "audio") {
             fileInput.accept = "audio/*"
         } else if (target.value === "video") {
@@ -226,7 +309,7 @@ const Team = () => {
         } else if (target.value === "image") {
             fileInput.accept = "image/*"
         } else if (target.value === "document") {
-            fileInput.accept = ".pdf, .doc, .docx, .zip, .txt"
+            fileInput.accept = ".pdf, .doc, .docx, .txt"
         }
         fileInput.value = "";
     }
@@ -236,8 +319,7 @@ const Team = () => {
         const lineHeight = (mainDiv.clientHeight * .01) + 20;
         const rows = parseInt((target.scrollHeight / lineHeight).toString().split(".")[0]);
         if (rows < 5) {
-            target.style.height = 'min-content';
-            target.style.height = (target.scrollHeight) + 'px';
+            target.style.height = target.scrollHeight + 'px';
         }
     }
 
@@ -342,6 +424,9 @@ const Team = () => {
                 name.value = sessionStorage.getItem('currentProduct');
                 description.value = sessionStorage.getItem('currentProductDescription');
                 type.value = sessionStorage.getItem('currentProductType');
+                // Un require file
+                const fileInput = document.getElementById('labeledInput-input-productFile');
+                fileInput.required = false;
             }
         } else {
             productContainer.style.display = 'none';
@@ -373,7 +458,8 @@ const Team = () => {
                             Lorem ipsum odor amet, consectetuer adipiscing elit. Pulvinar dictum orci egestas suscipit libero ridiculus. Curae eleifend morbi netus; cursus mattis sit. Suscipit consectetur nisl nulla curae ultricies ridiculus; id penatibus ac. Laoreet primis rutrum mollis nisl class interdum vulputate. Fames odio in fringilla eros finibus sapien. Himenaeos hendrerit sem risus orci faucibus nullam. Ligula nullam pharetra fusce vel auctor, maecenas magna nec.
                         </p>
                         <div className='content-product-file' id='content-product-file'>
-                            <iframe className='content-product-file-iframe' id='content-product-file-iframe' title='product-file-viewer' src='' sandbox='' scrolling="no" />
+                            {/* <iframe className='content-product-file-iframe' id='content-product-file-iframe' title='product-file-viewer' src='' sandbox='' scrolling="no" /> */}
+                            <object className='content-product-file-objectViewer' id='content-product-file-objectViewer' type="" data='http://localhost:5500/api/product/file/Test%20Product%203/Test%20Section%201/69469260'></object>
                         </div>
                         <div className='content-product-comment'>
                             <div className='content-product-comment-send-container'>
@@ -396,7 +482,7 @@ const Team = () => {
                             </div>
                             {(isEditing === true) ? (
                                 <div className='form-delete'>
-                                    <p className='form-delete-text' onClick={cancelSectionForm}>Delete</p>
+                                    <p className='form-delete-text' onClick={deleteSectionForm}>Delete</p>
                                 </div>
                             ) : ''}
                         </form>
@@ -416,7 +502,7 @@ const Team = () => {
                             </div>
                             {(isEditing === true) ? (
                                 <div className='form-delete'>
-                                    <p className='form-delete-text' onClick={cancelSectionForm}>Delete</p>
+                                    <p className='form-delete-text' onClick={deleteProductForm}>Delete</p>
                                 </div>
                             ) : ''}
                         </form>

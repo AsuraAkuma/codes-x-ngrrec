@@ -55,17 +55,18 @@ const SectionProduct = ({ name, type, section, cancelSection, cancelProduct }) =
         sessionStorage.setItem('currentSection', section);
         sessionStorage.setItem('currentProductDescription', res.description);
         sessionStorage.setItem('currentProductType', res.type);
-        // Get product info
-        const iframe = document.getElementById('content-product-file-iframe');
+        // Set image
+        const objectViewer = document.getElementById('content-product-file-objectViewer');
         const container = document.getElementById('content-product-file');
         if (type === "image") {
             const img = new Image();
             img.src = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`;
             img.onload = () => {
-                iframe.height = img.height;
-                iframe.width = img.width;
-                iframe.src = img.src;
-                if (iframe.height > container.clientHeight || iframe.width > container.clientWidth) {
+                objectViewer.height = img.height;
+                objectViewer.width = img.width;
+                container.style.height = img.height + 'px';
+                objectViewer.data = img.src;
+                if (objectViewer.height > container.clientHeight || objectViewer.width > container.clientWidth) {
                     container.style.display = '';
                     container.style.justifyContent = '';
                     container.style.alignItems = '';
@@ -76,12 +77,15 @@ const SectionProduct = ({ name, type, section, cancelSection, cancelProduct }) =
                 }
             }
         } else if (type === "document" || type === "video") {
-            iframe.src = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`
-            iframe.height = '100%';
-            iframe.width = '100%';
+            // objectViewer.data = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`
+            console.log(objectViewer.height)
+            // objectViewer.height = objectViewer.scrollTop + 'px';
+            // objectViewer.style.height = '100%'
+            objectViewer.scroll(0, 50)
+            objectViewer.width = '100%';
             container.style.height = '75%';
         } else if (type === "audio") {
-            iframe.src = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`;
+            objectViewer.data = `http://localhost:5500/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`;
         }
     }
     return (
