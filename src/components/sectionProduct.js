@@ -75,7 +75,7 @@ const SectionProduct = ({ name, type, section, cancelSection, cancelProduct }) =
                 objectViewer.width = img.width;
                 container.style.height = img.height + 'px';
                 objectViewer.data = img.src;
-                if (objectViewer.height > container.clientHeight || objectViewer.width > container.clientWidth) {
+                if (objectViewer.height >= container.clientHeight && objectViewer.width >= container.clientWidth) {
                     container.style.display = '';
                     container.style.justifyContent = '';
                     container.style.alignItems = '';

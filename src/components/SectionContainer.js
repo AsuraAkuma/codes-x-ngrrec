@@ -7,27 +7,6 @@ import AddButton from './addButton';
 const SectionContainer = ({ contents, isManager, setEdit, isEditing, cancelSection, cancelProduct }) => {
     let productComps = contents.products.map((v, i) => <SectionProduct name={v.name} type={v.type} key={v.name} section={contents.name} cancelProduct={cancelProduct} cancelSection={cancelSection} />);
     const createContainer = document.getElementById('create-container');
-    // Show product creation form
-    const showProductForm = () => {
-        const productContainer = document.getElementById('create-product');
-        if (productContainer.style.display === '' || productContainer.style.display === 'none') {
-            productContainer.style.display = 'flex';
-            createContainer.style.display = 'flex';
-            cancelSectionForm();
-            const headerText = document.getElementById('create-section-header');
-            const button = document.getElementById('create-section-form-button');
-            // Change header text
-            headerText.innerHTML = 'Create Section';
-            // Change button text
-            button.innerHTML = 'Create Section';
-        } else {
-            productContainer.style.display = 'none';
-            cancelProductForm();
-        }
-        const sectionInput = document.getElementById('create-product-form-section');
-        sectionInput.value = contents.name;
-        sessionStorage.setItem('currentSection', contents.name);
-    };
     // Cancel create section form
     const productForm = document.getElementById('create-product-form');
     const productFormContainer = document.getElementById('create-product');
@@ -48,6 +27,12 @@ const SectionContainer = ({ contents, isManager, setEdit, isEditing, cancelSecti
 
     const cancelSectionForm = () => {
         if (sectionFormContainer.style.display === 'flex') {
+            const headerText = document.getElementById('create-section-header');
+            const button = document.getElementById('create-section-form-button');
+            // Change header text
+            headerText.innerHTML = 'Create Section';
+            // Change button text
+            button.innerHTML = 'Create Section';
             sectionFormContainer.style.display = 'none';
             createContainer.style.display = 'none';
             sectionForm.reset();
@@ -56,6 +41,28 @@ const SectionContainer = ({ contents, isManager, setEdit, isEditing, cancelSecti
             }
         }
     }
+
+    // Show product creation form
+    const showProductForm = () => {
+        const productContainer = document.getElementById('create-product');
+        if (productContainer.style.display === '' || productContainer.style.display === 'none') {
+            cancelSectionForm();
+            productContainer.style.display = 'flex';
+            createContainer.style.display = 'flex';
+            const headerText = document.getElementById('create-section-header');
+            const button = document.getElementById('create-section-form-button');
+            // Change header text
+            headerText.innerHTML = 'Create Section';
+            // Change button text
+            button.innerHTML = 'Create Section';
+        } else {
+            productContainer.style.display = 'none';
+            cancelProductForm();
+        }
+        const sectionInput = document.getElementById('create-product-form-section');
+        sectionInput.value = contents.name;
+        sessionStorage.setItem('currentSection', contents.name);
+    };
     // Show create section form
     const showSectionForm = ({ target }) => {
         const headerText = document.getElementById('create-section-header');
@@ -75,16 +82,27 @@ const SectionContainer = ({ contents, isManager, setEdit, isEditing, cancelSecti
                 input.value = target.id;
             }
         } else {
-
-            sectionFormContainer.style.display = 'none';
             if (isEditing === true) {
                 // Change header text
                 headerText.innerHTML = 'Create Section';
                 // Change button text
                 button.innerHTML = 'Create Section';
+            } else {
+                // Change header text
+                headerText.innerHTML = 'Edit Section';
+                // Change button text
+                button.innerHTML = 'Submit';
+                // Prefill section name
+                input.value = target.id;
             }
-            if (target.className === 'sectionContainer-edit') {
-                setEdit(false);
+            if (target.className !== 'sectionContainer-edit') {
+                sectionFormContainer.style.display = 'none';
+            } else {
+                if (isEditing === true) {
+                    setEdit(false);
+                } else {
+                    setEdit(true);
+                }
             }
         }
         sessionStorage.setItem('currentSection', target.id);

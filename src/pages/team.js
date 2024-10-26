@@ -53,11 +53,16 @@ const Team = () => {
         const headerText = document.getElementById('create-section-header');
         const button = document.getElementById('create-section-form-button');
         if (sectionFormContainer.style.display === '' || sectionFormContainer.style.display === 'none') {
+            cancelProductForm();
             sectionFormContainer.style.display = 'flex';
             createContainer.style.display = 'flex';
-            cancelProductForm();
             if (target.className === 'sectionContainer-edit') {
                 setIsEditing(true);
+            } else {
+                // Change header text
+                headerText.innerHTML = 'Create Section';
+                // Change button text
+                button.innerHTML = 'Create Section';
             }
         } else {
             if (isEditing === true) {
@@ -154,8 +159,8 @@ const Team = () => {
             const textArea = document.getElementById('labeledInput-input-productDescription')
             productFormContainer.style.display = 'none';
             createContainer.style.display = 'none';
-            const productHeader = document.getElementById('create-section-header');
-            const productButton = document.getElementById('create-section-form-button');
+            const productHeader = document.getElementById('create-product-header');
+            const productButton = document.getElementById('create-product-form-button');
             productHeader.innerHTML = "Create Product";
             productButton.innerHTML = "Create Product";
             textArea.style.height = 'min-content';
@@ -357,6 +362,7 @@ const Team = () => {
         const response = await req.json();
         if (response.success === true) {
             content.value = "";
+            changeSize({ target: content });
             const commentContainer = document.getElementById('content-product-comments');
             commentContainer.innerHTML = `${renderToString(<ProductComment author={response.comment.author} timestamp={response.comment.timestamp} content={response.comment.content} />)}\n${commentContainer.innerHTML}`
         } else {
@@ -446,10 +452,43 @@ const Team = () => {
         </div>
     )
 
+    // Handle sidemenu click
+    const image = document.getElementById('sidemenu-toggle-image');
+    const toggle = document.getElementById('sidemenu-toggle');
+    const sidemenu = document.getElementById('sidemenu')
+    const sideMenuClick = () => {
+        if (sidemenu.style.display === '' || sidemenu.style.display === 'none') {
+            toggle.style.left = '70%';
+            image.style.transform = 'rotate(180deg)';
+            sidemenu.style.display = 'block';
+        } else {
+            toggle.style.left = '0%';
+            image.style.transform = 'rotate(0deg)';
+            sidemenu.style.display = 'none';
+        }
+    }
+    // Listen for resize
+    const mainResize = () => {
+        const mainDiv = document.getElementById('main');
+        const sidemenu = document.getElementById('sidemenu');
+        const toggle = document.getElementById('sidemenu-toggle');
+        if (mainDiv.clientWidth >= 600 && sidemenu.style.display === 'none') {
+            sidemenu.style.display = 'block';
+        }
+        if (mainDiv.clientWidth < 600 && (toggle.style.left === '' || toggle.style.left === '0%')) {
+            sidemenu.style.display = 'none';
+        }
+    };
+    window.addEventListener('resize', mainResize);
+
     return (
         <div className='body'>
             <Header />
             <div className='main' id='main'>
+                <div className='sidemenu-toggle' id='sidemenu-toggle' >
+                    <img className='sidemenu-toggle-image' id='sidemenu-toggle-image' src='/media/arrow-right-solid.svg' alt='sidemenu arrow' />
+                    <div className='sidemenu-toggle-cover' onClick={sideMenuClick}></div>
+                </div>
                 <section className='sidemenu' id='sidemenu'>
                     {(isManager === true) ? <AddButton buttonId={'addButton-section'} buttonText={"Add Section"} callback={showSectionForm} /> : ''}
 

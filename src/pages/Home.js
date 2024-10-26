@@ -13,13 +13,7 @@ const Home = () => {
       window.location.href = ""; //Girls site link
     } else if (targetId === "sign-in") {
       //sign in link
-      console.log(window.location.origin);
-      if (window.location.origin == "http://localhost:3001") {
-        window.location.pathname = "/signin";
-      } else {
-        window.location.href = "";
-
-      }
+      window.location.pathname = "/signin";
     } else {
       return;
     }

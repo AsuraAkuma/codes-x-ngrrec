@@ -74,3 +74,9 @@
     cursor: pointer;
 
 }
+
+@media screen and (max-width: 600px) {
+    .sectionProduct-name {
+        font-size: 20px;
+    }
+}

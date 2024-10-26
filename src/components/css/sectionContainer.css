@@ -41,29 +41,6 @@
     /* border: 2px solid red; */
 }
 
-.sectionContainer-header-arrow2 {
-    position: absolute;
-    left: 84.5%;
-    filter: blur(2px);
-    opacity: 50%;
-    transform: translateY(-4px);
-    animation: arrow-bob 2s linear infinite;
-}
-
-@keyframes arrow-bob {
-    0% {
-        transform: translateY(-2px);
-    }
-
-    50% {
-        transform: translateY(-4px);
-    }
-
-    100% {
-        transform: translateY(-2px);
-    }
-}
-
 .sectionContainer-edit {
     position: relative;
     width: 92%;
@@ -82,4 +59,40 @@
 .sectionContainer-edit:hover {
     color: var(--glow);
     box-shadow: 0px 0px 5px 1px var(--glow);
+}
+
+@media screen and (max-width: 810px) {
+
+    .sectionContainer-edit {
+        height: 35px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .sectionContainer-edit {
+        height: 30px;
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .addButton-text {
+        font-size: 10px;
+    }
+
+    .sectionContainer-edit {
+        height: 25px;
+        font-size: 12.5px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .addButton-text {
+        font-size: 20px;
+    }
+
+    .sectionContainer-edit {
+        height: 40px;
+        font-size: 20px;
+    }
 }
