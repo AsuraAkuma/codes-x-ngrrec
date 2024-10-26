@@ -3,6 +3,8 @@ import '../css/base.css';
 import LabeledInput from '../components/labeledInput';
 import { useState } from 'react';
 import ErrorMessage from '../components/error';
+import config from '../config.json';
+const { apiURL } = config;
 
 const SignUp = () => {
     const [showError, setShowError] = useState(false);
@@ -10,7 +12,7 @@ const SignUp = () => {
     async function handleSubmit(event) {
         event.preventDefault();
         const formData = new FormData(event.target);
-        const req = await fetch(`http://localhost:5503/api/signup`, {
+        const req = await fetch(`http://${apiURL}/api/signup`, {
             method: 'POST',
             mode: 'cors',
             headers: { "Content-Type": 'application/json' },

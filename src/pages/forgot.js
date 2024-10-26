@@ -3,6 +3,8 @@ import LabeledInput from "../components/labeledInput";
 import '../css/forgot.css';
 import '../css/base.css'
 import ErrorMessage from "../components/error";
+import config from '../config.json';
+const { apiURL } = config;
 
 const ForgotPassword = () => {
     const [showError, setShowError] = useState(false);
@@ -17,7 +19,7 @@ const ForgotPassword = () => {
 
         if (targetElement.id === "forgot-form-username") {
             const formData = new FormData(targetElement);
-            const req = await fetch(`http://localhost:5503/api/login/forgot`, {
+            const req = await fetch(`http://${apiURL}/api/login/forgot`, {
                 method: 'POST',
                 mode: 'cors',
                 headers: { "Content-Type": 'application/json' },
@@ -41,7 +43,7 @@ const ForgotPassword = () => {
             }
         } else if (targetElement.id === "forgot-form-code") {
             const formData = new FormData(targetElement);
-            const req = await fetch(`http://localhost:5503/api/login/forgot/code`, {
+            const req = await fetch(`http://${apiURL}/api/login/forgot/code`, {
                 method: 'POST',
                 mode: 'cors',
                 headers: { "Content-Type": 'application/json' },
@@ -67,7 +69,7 @@ const ForgotPassword = () => {
             }
         } else if (targetElement.id === "forgot-form-password") {
             const formData = new FormData(targetElement);
-            const req = await fetch(`http://localhost:5503/api/login/forgot/password`, {
+            const req = await fetch(`http://${apiURL}/api/login/forgot/password`, {
                 method: 'POST',
                 mode: 'cors',
                 headers: { "Content-Type": 'application/json' },
