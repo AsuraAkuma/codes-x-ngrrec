@@ -22,7 +22,6 @@ const SignIn = () => {
             })
         })
         const response = await req.json();
-        console.log(response)
         if (response.success) {
             sessionStorage.setItem('sessionKey', response.sessionKey);
             window.location.pathname = "/team";

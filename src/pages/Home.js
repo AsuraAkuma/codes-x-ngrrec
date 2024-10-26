@@ -67,7 +67,7 @@ const Home = () => {
           </div>
           {/* Button */}
           <div className='teams-container-sub'>
-            <button className='teams-container-sub-button' id='team-1' onClick={handleClick}>Dive In</button>
+            <button className='teams-container-sub-button' id='team-2' onClick={handleClick}>Dive In</button>
           </div>
           {/* Shapes */}
           <img src='/media/Star 1.svg' className='teams-container-shape' id='teams-container-shape-1' alt='shape with green glow' />
