@@ -18,7 +18,7 @@ const Team = () => {
     const [isEditing, setIsEditing] = useState(false);
     const createContainer = document.getElementById('create-container');
     const getSections = async () => {
-        const req = await fetch(`http://${apiURL}/api/section`);
+        const req = await fetch(`${apiURL}/api/section`);
         const response = await req.json();
         if (response.success === true) {
             setSections(response.sections); // Store the sections in state
@@ -98,7 +98,7 @@ const Team = () => {
                 }
             }
         }
-        const req = await fetch(`http://${apiURL}/api/section/${(isEditing === true) ? "edit" : "create"}`, {
+        const req = await fetch(`${apiURL}/api/section/${(isEditing === true) ? "edit" : "create"}`, {
             method: 'POST',
             mode: 'cors',
             headers: { "Content-Type": 'application/json' },
@@ -128,7 +128,7 @@ const Team = () => {
             return;
         }
         const currentSection = sessionStorage.getItem('currentSection');
-        const req = await fetch(`http://${apiURL}/api/section/delete`, {
+        const req = await fetch(`${apiURL}/api/section/delete`, {
             method: 'POST',
             mode: 'cors',
             headers: { "Content-Type": 'application/json' },
@@ -186,7 +186,7 @@ const Team = () => {
             return;
         }
         formData.append('target', sessionStorage.getItem('currentProduct'));
-        const req = await fetch(`http://${apiURL}/api/product/${(isEditing === true) ? "edit" : "create"}`, {
+        const req = await fetch(`${apiURL}/api/product/${(isEditing === true) ? "edit" : "create"}`, {
             method: 'POST',
             mode: 'cors',
             // headers: { "Content-Type": 'multipart/form-data' },
@@ -216,7 +216,7 @@ const Team = () => {
                 const container = document.getElementById('content-product-file');
                 if (type === "image") {
                     const img = new Image();
-                    img.src = `http://${apiURL}/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`;
+                    img.src = `${apiURL}/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`;
                     img.onload = () => {
                         objectViewer.height = img.height;
                         objectViewer.width = img.width;
@@ -232,12 +232,12 @@ const Team = () => {
                         }
                     }
                 } else if (type === "document" || type === "video") {
-                    objectViewer.data = `http://${apiURL}/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`
+                    objectViewer.data = `${apiURL}/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`
                     objectViewer.height = '100%';
                     objectViewer.width = '100%';
                     container.style.height = '75%';
                 } else if (type === "audio") {
-                    objectViewer.data = `http://${apiURL}/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`;
+                    objectViewer.data = `${apiURL}/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`;
                     container.style.display = 'flex';
                     container.style.justifyContent = 'center';
                     container.style.alignItems = 'center';
@@ -259,7 +259,7 @@ const Team = () => {
         if (!window.confirm(`Do you wish to delete the product "${sessionStorage.getItem('currentProduct')}"?`)) {
             return;
         }
-        const req = await fetch(`http://${apiURL}/api/product/delete`, {
+        const req = await fetch(`${apiURL}/api/product/delete`, {
             method: 'POST',
             mode: 'cors',
             headers: { "Content-Type": 'application/json' },
@@ -349,7 +349,7 @@ const Team = () => {
             return;
         }
         const content = document.getElementById('content-product-comment-text');
-        const req = await fetch(`http://${apiURL}/api/product/comment/create`, {
+        const req = await fetch(`${apiURL}/api/product/comment/create`, {
             method: 'POST',
             mode: 'cors',
             headers: { "Content-Type": 'application/json' },
@@ -394,7 +394,7 @@ const Team = () => {
     }
     // Check if isManager
     const checkIfManager = async () => {
-        const req = await fetch(`http://${apiURL}/api/login/auth?` + new URLSearchParams({ sessionKey: sessionStorage.getItem('sessionKey') }));
+        const req = await fetch(`${apiURL}/api/login/auth?` + new URLSearchParams({ sessionKey: sessionStorage.getItem('sessionKey') }));
         const res = await req.json();
         if (res.success === true) {
             setIsManager(res.isManager);

@@ -38,7 +38,7 @@ const SectionProduct = ({ name, type, section, cancelSection, cancelProduct }) =
         const header = document.getElementById('content-product-header');
         header.innerHTML = `${section} - ${name}`;
         // Get product info
-        const req = await fetch(`http://${apiURL}/api/product/info/${name}/${section}/${sessionStorage.getItem('sessionKey')}`)
+        const req = await fetch(`${apiURL}/api/product/info/${name}/${section}/${sessionStorage.getItem('sessionKey')}`)
         const res = await req.json();
         // Set description text
         const description = document.getElementById('content-product-description');
@@ -65,7 +65,7 @@ const SectionProduct = ({ name, type, section, cancelSection, cancelProduct }) =
         const container = document.getElementById('content-product-file');
         if (type === "image") {
             const img = new Image();
-            img.src = `http://${apiURL}/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`;
+            img.src = `${apiURL}/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`;
             img.onload = () => {
                 // Show/hide viewers
                 objectViewer.style.display = 'block';
@@ -95,7 +95,7 @@ const SectionProduct = ({ name, type, section, cancelSection, cancelProduct }) =
             objectViewer.style.display = 'block';
             audioViewer.style.display = 'none';
             videoViewer.style.display = 'none';
-            objectViewer.data = `http://${apiURL}/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`
+            objectViewer.data = `${apiURL}/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`
             objectViewer.height = '100%'
             objectViewer.width = '100%';
             container.style.height = '75%';
@@ -105,7 +105,7 @@ const SectionProduct = ({ name, type, section, cancelSection, cancelProduct }) =
             objectViewer.style.display = 'none';
             audioViewer.style.display = 'none';
             videoViewer.style.display = 'block';
-            videoViewer.src = `http://${apiURL}/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`
+            videoViewer.src = `${apiURL}/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`
             videoViewer.style.height = '100%'
             videoViewer.style.width = '100%';
             container.style.height = '75%';
@@ -118,7 +118,7 @@ const SectionProduct = ({ name, type, section, cancelSection, cancelProduct }) =
             videoViewer.style.display = 'none';
             audioViewer.style.height = '100%'
             audioViewer.style.width = '50%';
-            audioViewer.src = `http://${apiURL}/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`;
+            audioViewer.src = `${apiURL}/api/product/file/${name}/${section}/${sessionStorage.getItem('sessionKey')}`;
             container.style.height = '20%';
             container.style.display = 'flex';
             container.style.justifyContent = 'center';

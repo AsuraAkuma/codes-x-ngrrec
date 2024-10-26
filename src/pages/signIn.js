@@ -12,7 +12,7 @@ const SignIn = () => {
     async function handleSubmit(event) {
         event.preventDefault();
         const formData = new FormData(event.target);
-        const req = await fetch(`http://${apiURL}/api/login`, {
+        const req = await fetch(`${apiURL}/api/login`, {
             method: 'POST',
             mode: 'cors',
             headers: { "Content-Type": 'application/json' },
