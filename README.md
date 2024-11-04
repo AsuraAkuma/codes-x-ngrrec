@@ -13,7 +13,7 @@
 - Session management
 
 ## Links
-**Live website:** https://ngrrec.codes121.xyz/team
+**Live website:** https://ngrrec.codes121.xyz
 
 **Handshake:** https://app.joinhandshake.com/profiles/51371349
 
