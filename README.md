@@ -11,3 +11,8 @@
 - - Product creation, ipdating, and deletion
 - Content viewing for most devices
 - Session management
+
+## Links
+**Live website:** https://ngrrec.codes121.xyz/team
+**Handshake:** https://app.joinhandshake.com/profiles/51371349
+**LinkedIn:** https://www.linkedin.com/in/adam-gardner-24b01b1a7
