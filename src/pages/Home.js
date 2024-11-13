@@ -10,7 +10,7 @@ const Home = () => {
     if (targetId === "team-1") {
       window.location.pathname = "/team";
     } else if (targetId === "team-2") {
-      window.location.href = ""; //Girls site link
+      window.location.href = "https://eportfolio.siue.edu/codes2026ngrrec1/"; //Girls site link
     } else if (targetId === "sign-in") {
       //sign in link
       window.location.pathname = "/signin";
@@ -39,7 +39,7 @@ const Home = () => {
           </div>
           {/* Focus */}
           <div className='teams-container-sub'>
-            <p className='teams-container-sub-focus'>Focusing on ...</p>
+            <p className='teams-container-sub-focus'>Explore our project</p>
           </div>
           {/* Button */}
           <div className='teams-container-sub'>
@@ -63,7 +63,7 @@ const Home = () => {
           </div>
           {/* Focus */}
           <div className='teams-container-sub'>
-            <p className='teams-container-sub-focus'>Focusing on ...</p>
+            <p className='teams-container-sub-focus'>Dive into our work</p>
           </div>
           {/* Button */}
           <div className='teams-container-sub'>

@@ -319,7 +319,7 @@ const Team = () => {
         } else if (target.value === "image") {
             fileInput.accept = "image/*"
         } else if (target.value === "document") {
-            fileInput.accept = ".pdf, .doc, .docx, .txt"
+            fileInput.accept = ".pdf, .txt"
         }
         fileInput.value = "";
     }
@@ -498,6 +498,9 @@ const Team = () => {
                     ))}
                 </section>
                 <section className='content'>
+                    <div className='content-background'>
+                        <img className='content-background-image' src='/media/cropped-Artboard-1-1.png' alt='codes logo' id='content-background-image-codes' />
+                    </div>
                     <div className='content-product' id='content-product'>
                         <h2 className='content-product-header' id='content-product-header'>Section Name - Product Name</h2>
                         {(isManager === true) ? editButton : ""}

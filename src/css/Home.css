@@ -102,23 +102,23 @@
 }
 
 #teams-container-shape-1 {
-  top: 50%;
+  top: 45%;
   animation: shapeWiggle 2s linear infinite;
 }
 
 #teams-container-shape-2 {
-  top: 15%;
+  top: 10%;
   animation: shapeWiggle 2s linear infinite reverse;
 }
 
 #teams-container-shape-3 {
-  top: 15%;
+  top: 10%;
   left: 75%;
   animation: shapeWiggle 2s linear infinite alternate-reverse;
 }
 
 #teams-container-shape-4 {
-  top: 50%;
+  top: 45%;
   left: 70%;
   animation: shapeWiggle 2s linear infinite reverse;
 }

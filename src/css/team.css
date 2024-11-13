@@ -48,6 +48,24 @@
     /* border: 2px solid red; */
 }
 
+.content-background {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background-image: url('/public/media/leaf-solid.svg');
+    background-size: 50px;
+    opacity: 10%;
+    filter: var(--accentFilter);
+    /* border: 2px solid red; */
+}
+
+.content-background-image {
+    position: absolute;
+
+}
+
 .content-product {
     position: relative;
     height: 100%;
