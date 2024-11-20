@@ -21,7 +21,7 @@ const Team = () => {
         const req = await fetch(`${apiURL}/api/section`);
         const response = await req.json();
         if (response.success === true) {
-            setSections(response.sections); // Store the sections in state
+            setSections(response.sections.sort((a, b) => a.order - b.order)); // Store the sections in state
         } else {
             setShowError(true);
             setErrorMessage(response.error);
@@ -499,6 +499,8 @@ const Team = () => {
                 </section>
                 <section className='content'>
                     <div className='content-background'>
+                    </div>
+                    <div className='content-image-center' id="content-image-center">
                         <img className='content-background-image' src='/media/cropped-Artboard-1-1.png' alt='codes logo' id='content-background-image-codes' />
                     </div>
                     <div className='content-product' id='content-product'>

@@ -27,6 +27,7 @@ const SectionProduct = ({ name, type, section, cancelSection, cancelProduct }) =
 
     // Show product container
     const showProduct = async () => {
+        console.log('test')
         cancelSection();
         cancelProduct();
         // Hide create-container
@@ -49,9 +50,11 @@ const SectionProduct = ({ name, type, section, cancelSection, cancelProduct }) =
         commentContainer.innerHTML = "";
         commentInput.value = "";
         // generate comments
-        if (res.comments.length > 0) {
-            const comments = res.comments.map((v, i) => <ProductComment author={v.author} timestamp={v.timestamp} content={v.content} />);
-            commentContainer.innerHTML = renderToString(comments);
+        if (res.comments) {
+            if (res.comments.length > 0) {
+                const comments = res.comments.map((v, i) => <ProductComment author={v.author} timestamp={v.timestamp} content={v.content} />);
+                commentContainer.innerHTML = renderToString(comments);
+            }
         }
         // Set current product
         sessionStorage.setItem('currentProduct', name);

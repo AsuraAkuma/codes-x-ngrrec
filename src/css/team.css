@@ -49,7 +49,7 @@
 }
 
 .content-background {
-    position: relative;
+    position: absolute;
     height: 100%;
     width: 100%;
     overflow-x: hidden;
@@ -57,13 +57,21 @@
     background-image: url('/public/media/leaf-solid.svg');
     background-size: 50px;
     opacity: 10%;
-    filter: var(--accentFilter);
+    /* filter: var(--accentFilter); */
     /* border: 2px solid red; */
 }
 
 .content-background-image {
     position: absolute;
-
+    width: auto;
+    max-width: 90%;
+    left: 5%;
+    height: 40%;
+    max-height: auto;
+    top: 2%;
+    /* filter: var(--accentFilter); */
+    filter: invert(40%) sepia(13%) saturate(770%) hue-rotate(64deg) brightness(101%) contrast(86%);
+    /* border: 2px solid red; */
 }
 
 .content-product {
